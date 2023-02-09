@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4CA6E0922994CCB600911AEE /* HabitsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA6E0912994CCB600911AEE /* HabitsStore.swift */; };
 		4CBC6EC629927AB600DB641C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC6EC529927AB600DB641C /* AppDelegate.swift */; };
 		4CBC6EC829927AB600DB641C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC6EC729927AB600DB641C /* SceneDelegate.swift */; };
 		4CBC6ECA29927AB600DB641C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC6EC929927AB600DB641C /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4CA6E0912994CCB600911AEE /* HabitsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitsStore.swift; sourceTree = "<group>"; };
 		4CBC6EC229927AB600DB641C /* MyHabits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyHabits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CBC6EC529927AB600DB641C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CBC6EC729927AB600DB641C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				4CBC6ED329927AB700DB641C /* Info.plist */,
 				4CBC6EDA29927B4A00DB641C /* HabitsViewController.swift */,
 				4CBC6ED929927B4A00DB641C /* InfoViewController.swift */,
+				4CA6E0912994CCB600911AEE /* HabitsStore.swift */,
 			);
 			path = MyHabits;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CA6E0922994CCB600911AEE /* HabitsStore.swift in Sources */,
 				4CBC6ECA29927AB600DB641C /* ViewController.swift in Sources */,
 				4CBC6EC629927AB600DB641C /* AppDelegate.swift in Sources */,
 				4CBC6EDB29927B4A00DB641C /* InfoViewController.swift in Sources */,

@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appearanceHabits.configureWithDefaultBackground()
         habitsNavigationController.navigationBar.standardAppearance = appearanceHabits
         habitsNavigationController.navigationBar.scrollEdgeAppearance = appearanceHabits
+        habitsNavigationController.navigationBar.prefersLargeTitles = true
 
         return habitsNavigationController
     }
@@ -31,6 +32,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appearanceInfo.configureWithDefaultBackground()
         infoViewController.navigationBar.standardAppearance = appearanceInfo
         infoViewController.navigationBar.scrollEdgeAppearance = appearanceInfo
+
+        
 
         return infoViewController
     }
