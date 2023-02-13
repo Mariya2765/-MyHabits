@@ -20,6 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         habitsNavigationController.navigationBar.standardAppearance = appearanceHabits
         habitsNavigationController.navigationBar.scrollEdgeAppearance = appearanceHabits
         habitsNavigationController.navigationBar.prefersLargeTitles = true
+        habitsNavigationController.navigationBar.backgroundColor = .white
 
         return habitsNavigationController
     }
