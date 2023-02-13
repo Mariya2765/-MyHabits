@@ -15,7 +15,7 @@ class InfoViewController: UIViewController {
 
     private lazy var tableView: UITableView = {
 
-        let tableView = UITableView(frame: .zero, style: .grouped)
+        let tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(InfoTableViewCell.self, forCellReuseIdentifier: Constants.reuseIdentifire )
         tableView.dataSource = self
         tableView.delegate = self
@@ -27,6 +27,7 @@ class InfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Информация"
         view.addSubview(tableView)
         self.tableView.register(InfoTableViewCell.self, forCellReuseIdentifier: Constants.reuseIdentifire)
         addConstraintsOfTableView()
@@ -50,11 +51,12 @@ extension InfoViewController: UITableViewDataSource, UITableViewDelegate {
         return 1
     }
 
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifire, for: indexPath) as! InfoTableViewCell
-        var content = cell.defaultContentConfiguration()
-        content.text = "Прохождение этапов, за которые за 21 день вырабатывается привычка, подчиняется следующему алгоритму: "
-        cell.contentConfiguration = content
+//        var content = cell.defaultContentConfiguration()
+//        content.text = "Прохождение этапов, за которые за 21 день вырабатывается привычка, подчиняется следующему алгоритму: "
+//        cell.contentConfiguration = content
 
         return cell
     }
