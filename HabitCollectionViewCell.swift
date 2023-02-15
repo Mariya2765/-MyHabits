@@ -23,8 +23,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
         var title = UILabel()
         title.font = .systemFont(ofSize: 13, weight: .regular)
         title.textColor = .black
-        // задала пока на пробу
-        title.text = "50%"
+
+//        title.text = "50%"
         title.translatesAutoresizingMaskIntoConstraints = false
         return title
     }()
