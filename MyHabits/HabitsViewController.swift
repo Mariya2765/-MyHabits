@@ -61,6 +61,10 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
 
         return cell
     }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: UIScreen.main.bounds.width - 48/3, height: 100)
+    }
 }
 
 
