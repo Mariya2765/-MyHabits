@@ -23,6 +23,7 @@ class HabitsViewController: UIViewController {
         addConstraintsOfCollectionView()
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = UIColor(red: 242/255.0, green: 242/255.0, blue: 247/255.0, alpha: 1.0)
         collectionView.showsVerticalScrollIndicator = true
         collectionView.register(HabitCollectionViewCell.self, forCellWithReuseIdentifier: Constants.reuseIdentifier)
 
@@ -42,7 +43,8 @@ class HabitsViewController: UIViewController {
     }
 
     @objc private func addHabit() {
-//        let habitVc =
+        let habitVc = HabitViewController()
+        navigationController?.present(habitVc, animated: true)
 
     }
 }
@@ -52,18 +54,53 @@ class HabitsViewController: UIViewController {
 extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        1
+        if section == 0 {
+        return 1
+        } else {
+       return 5
+    }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.reuseIdentifier, for: indexPath) as! HabitCollectionViewCell
         cell.configure(progress: HabitsStore.shared.todayProgress, title: "\(Int(HabitsStore.shared.todayProgress))%")
+        cell.backgroundColor = .white
 
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: UIScreen.main.bounds.width - 48/3, height: 100)
+        sizeOfCollectionView()
+//        CGSize(width: UIScreen.main.bounds.width - 48/3, height: 100)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        10
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        40
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        .init(
+            top: 25,
+            left: 8,
+            bottom: 8,
+            right: 8
+        )
+    }
+
+    private func sizeOfCollectionView() -> CGSize {
+//        let numberOfCells: CGFloat = 1
+//        let offsetBetweenCells: CGFloat = 8
+
+        let offsetFromCellToScreen: CGFloat = 20
+        let cellHeight: CGFloat = 60
+        let screenWidth = UIScreen.main.bounds.width
+//        let side = (screenWidth - offsetBetweenCells * (numberOfCells - 1) - offsetFromCellToScreen * 2) / numberOfCells
+        let cellWidth = screenWidth - offsetFromCellToScreen * 2
+        let sizeOfCell = CGSize(width: cellWidth, height: cellHeight)
+        return sizeOfCell
     }
 }
 

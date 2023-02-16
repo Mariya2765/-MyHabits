@@ -10,9 +10,12 @@ import UIKit
 
 class HabitCollectionViewCell: UICollectionViewCell {
 
+   static let reusebleID = "collection ID"
+
     private let titleLabel: UILabel = {
         let title = UILabel()
         title.font = .systemFont(ofSize: 13, weight: .regular)
+        title.alpha = 0.6
         title.textColor = .black
         title.text = "Все получится!"
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -23,6 +26,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         var title = UILabel()
         title.font = .systemFont(ofSize: 13, weight: .regular)
         title.textColor = .black
+        title.alpha = 0.6
 
 //        title.text = "50%"
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -50,6 +54,11 @@ class HabitCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layer.cornerRadius = 10
+    }
+
     private func addElements() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(titleProgress)
@@ -70,7 +79,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
             progressView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
             progressView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             progressView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            progressView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            progressView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }
 
