@@ -14,7 +14,8 @@ class HabitViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        navigationItem.title = "Создать"
+//        view.backgroundColor = .white
         view.addSubview(habitView)
         habitView.translatesAutoresizingMaskIntoConstraints = false
         addConstraints()

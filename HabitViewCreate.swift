@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class HabitViewCreate: UIView {
+class HabitViewCreate: UIView, UITextFieldDelegate {
 
     private let titleLabelName: UILabel = {
         let title = UILabel()
@@ -22,19 +22,23 @@ class HabitViewCreate: UIView {
     lazy var nameOfHabit: UITextField = {
         let tfHabit = UITextField()
 
-        tfHabit.backgroundColor = .systemGray6
-        tfHabit.layer.borderColor = UIColor.lightGray.cgColor
+//        tfHabit.backgroundColor = .systemGray6
+//        tfHabit.layer.borderColor = UIColor.lightGray.cgColor
 //        tfHabit.layer.borderWidth = 0.5
 //        tfHabit.layer.cornerRadius = 10
 //        tfHabit.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 
-        tfHabit.font = .systemFont(ofSize: 13, weight: .regular)
+        tfHabit.font = .systemFont(ofSize: 17, weight: .regular)
         tfHabit.textColor = .black
-        tfHabit.alpha = 0.6
+//        tfHabit.alpha = 0.8
+        
         tfHabit.autocapitalizationType = .none
         tfHabit.placeholder = "Бегать по утрам, спать 8 часов и т.п."
         tfHabit.textAlignment = .left
         tfHabit.tintColor = .systemBlue
+        tfHabit.delegate = self
+//        tfHabit.backgroundColor = .systemGray
+        tfHabit.translatesAutoresizingMaskIntoConstraints = false
 //        tfHabit.delegate = self
 //        tfHabit.tag = 1
 
@@ -69,8 +73,8 @@ class HabitViewCreate: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-//        addElements()
-//        addConstraints()
+        addElements()
+        addConstraints()
 
     }
 
@@ -99,15 +103,15 @@ class HabitViewCreate: UIView {
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
 
-            titleLabelName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 50),
-            titleLabelName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            titleLabelName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            titleLabelName.heightAnchor.constraint(equalToConstant: 50),
+            titleLabelName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            titleLabelName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            titleLabelName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+//            titleLabelName.heightAnchor.constraint(equalToConstant: 50),
 
-            nameOfHabit.topAnchor.constraint(equalTo: titleLabelName.bottomAnchor),
-            nameOfHabit.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            nameOfHabit.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            nameOfHabit.heightAnchor.constraint(equalToConstant: 50)
+            nameOfHabit.topAnchor.constraint(equalTo: titleLabelName.bottomAnchor, constant: 10),
+            nameOfHabit.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            nameOfHabit.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+//            nameOfHabit.heightAnchor.constraint(equalToConstant: 50)
 
 
 

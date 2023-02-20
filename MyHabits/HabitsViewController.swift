@@ -44,8 +44,36 @@ class HabitsViewController: UIViewController {
 
     @objc private func addHabit() {
         let habitVc = HabitViewController()
-        navigationController?.present(habitVc, animated: true)
+        let habitNavContr = UINavigationController(rootViewController: habitVc)
 
+        let appearanceNavContr = UINavigationBarAppearance()
+        appearanceNavContr.configureWithDefaultBackground()
+        habitNavContr.navigationBar.standardAppearance = appearanceNavContr
+        habitNavContr.navigationBar.scrollEdgeAppearance = appearanceNavContr
+        habitNavContr.navigationBar.prefersLargeTitles = false
+        habitNavContr.navigationBar.backgroundColor = .white
+
+//        habitNavContr.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 17), .foregroundColor: UIColor(red: 161/255.0, green: 22/255.0, blue: 204/255.0, alpha: 1.0)]
+        // во вью дидлоад добавить HabitViewController()
+        // цвет для навиг бара
+        // во вью дидлоад навиг айтем
+        
+        let buttonSave = UIBarButtonItem(title: "Сохранить", style: .done, target: self, action: #selector(saveHabit))
+        buttonSave.tintColor = UIColor(red: 161/255.0, green: 22/255.0, blue: 204/255.0, alpha: 1.0)
+        habitVc.navigationItem.rightBarButtonItem = buttonSave
+
+        let buttonCancel = UIBarButtonItem(title: "Отмена", style: .done, target: self, action: #selector(cancelHabit))
+        buttonCancel.tintColor = UIColor(red: 161/255.0, green: 22/255.0, blue: 204/255.0, alpha: 1.0)
+        habitVc.navigationItem.leftBarButtonItem = buttonCancel
+
+        navigationController?.present(habitNavContr, animated: true)
+
+    }
+
+    @objc private func saveHabit() {
+    }
+
+    @objc private func cancelHabit() {
     }
 }
 
