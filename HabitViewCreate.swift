@@ -51,7 +51,7 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
     }()
 
     private let imageColor: UIView = {
-        let image = UIView()
+        let image = UIView(frame: CGRect(x: 10, y: 15, width: 30, height: 30))
         image.layer.cornerRadius = image.frame.height/2
         image.layer.borderWidth = 15
         image.backgroundColor = .systemOrange
@@ -130,9 +130,12 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
             colorLabelName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
             colorLabelName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
 
-            imageColor.topAnchor.constraint(equalTo: colorLabelName.bottomAnchor, constant: 15),
+            imageColor.topAnchor.constraint(equalTo: colorLabelName.bottomAnchor, constant: 10),
             imageColor.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            imageColor.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
+//            imageColor.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+            imageColor.heightAnchor.constraint(equalToConstant: 30),
+            imageColor.widthAnchor.constraint(equalToConstant: 30),
+            imageColor.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
 
 
 
