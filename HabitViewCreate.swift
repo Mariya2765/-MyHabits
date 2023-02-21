@@ -19,35 +19,47 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
         return title
     }()
 
-    lazy var nameOfHabit: UITextField = {
+    lazy var nameOfHabitTextField: UITextField = {
         let tfHabit = UITextField()
 
-//        tfHabit.backgroundColor = .systemGray6
-//        tfHabit.layer.borderColor = UIColor.lightGray.cgColor
-//        tfHabit.layer.borderWidth = 0.5
-//        tfHabit.layer.cornerRadius = 10
-//        tfHabit.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 
         tfHabit.font = .systemFont(ofSize: 17, weight: .regular)
         tfHabit.textColor = .black
-//        tfHabit.alpha = 0.8
-        
+
         tfHabit.autocapitalizationType = .none
         tfHabit.placeholder = "Бегать по утрам, спать 8 часов и т.п."
         tfHabit.textAlignment = .left
         tfHabit.tintColor = .systemBlue
         tfHabit.delegate = self
-//        tfHabit.backgroundColor = .systemGray
         tfHabit.translatesAutoresizingMaskIntoConstraints = false
-//        tfHabit.delegate = self
-//        tfHabit.tag = 1
 
-//        let spaceView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-//        tfLogin.leftViewMode = .always
-//        tfLogin.leftView = spaceView
-//        tfLogin.translatesAutoresizingMaskIntoConstraints = false
-
+        let spaceView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        tfHabit.leftViewMode = .always
+        tfHabit.leftView = spaceView
+        tfHabit.tag = 1
         return tfHabit
+
+    }()
+
+    private let colorLabelName: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13, weight: .semibold)
+        label.textColor = .black
+        label.text = "ЦВЕТ"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private let imageColor: UIView = {
+        let image = UIView()
+        image.layer.cornerRadius = image.frame.height/2
+        image.layer.borderWidth = 15
+        image.backgroundColor = .systemOrange
+        image.layer.borderColor = UIColor.orange.cgColor
+        image.clipsToBounds = true
+        image.translatesAutoresizingMaskIntoConstraints = false
+
+        return image
 
     }()
 
@@ -86,7 +98,9 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(titleLabelName)
-        contentView.addSubview(nameOfHabit)
+        contentView.addSubview(nameOfHabitTextField)
+        contentView.addSubview(colorLabelName)
+        contentView.addSubview(imageColor)
 
 
     }
@@ -108,10 +122,18 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
             titleLabelName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
 //            titleLabelName.heightAnchor.constraint(equalToConstant: 50),
 
-            nameOfHabit.topAnchor.constraint(equalTo: titleLabelName.bottomAnchor, constant: 10),
-            nameOfHabit.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            nameOfHabit.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
-//            nameOfHabit.heightAnchor.constraint(equalToConstant: 50)
+            nameOfHabitTextField.topAnchor.constraint(equalTo: titleLabelName.bottomAnchor, constant: 10),
+            nameOfHabitTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            nameOfHabitTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+
+            colorLabelName.topAnchor.constraint(equalTo: nameOfHabitTextField.bottomAnchor, constant: 20),
+            colorLabelName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            colorLabelName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+
+            imageColor.topAnchor.constraint(equalTo: colorLabelName.bottomAnchor, constant: 15),
+            imageColor.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            imageColor.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
+
 
 
 

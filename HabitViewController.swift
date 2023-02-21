@@ -30,5 +30,29 @@ class HabitViewController: UIViewController {
         ])
     }
 
+   
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    func subscribeKeyboardEvents() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc func keyboardWillShow(_ notification: NSNotification) {
+        guard let ks = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: ks.height - self.view.safeAreaInsets.bottom + 20, right: 0)
+        self.habitView.scrollView.contentInset = insets
+        self.habitView.scrollView.scrollIndicatorInsets = insets
+
+    }
+
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        self.habitView.scrollView.contentInset = .zero
+        self.habitView.scrollView.scrollIndicatorInsets = .zero
+    }
 
 }
