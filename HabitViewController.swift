@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class HabitViewController: UIViewController {
+class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate {
 
     private let habitView = HabitViewCreate()
 
@@ -54,5 +54,23 @@ class HabitViewController: UIViewController {
         self.habitView.scrollView.contentInset = .zero
         self.habitView.scrollView.scrollIndicatorInsets = .zero
     }
+
+}
+
+extension HabitViewController: ColorPickerViewDelegate {
+    func colorImageWasTapped() {
+        let picker = UIColorPickerViewController()
+                picker.selectedColor = self.view.backgroundColor!
+                picker.delegate = self
+                self.present(picker, animated: true, completion: nil)
+    }
+    func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+
+//    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
+//        let color = viewController.selectedColor
+//    }
+
 
 }

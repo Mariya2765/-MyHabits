@@ -8,7 +8,15 @@
 import Foundation
 import UIKit
 
+protocol ColorPickerViewDelegate: AnyObject {
+    func colorImageWasTapped()
+}
+
 class HabitViewCreate: UIView, UITextFieldDelegate {
+
+    private let tapGestureRecognizer = UITapGestureRecognizer()
+
+    weak var delegate: ColorPickerViewDelegate?
 
     private let titleLabelName: UILabel = {
         let title = UILabel()
@@ -59,6 +67,8 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
         image.clipsToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false
 
+//        image.addTarget(self, action: #selector(colorPressed), for: .touchUpInside)
+
         return image
 
     }()
@@ -101,6 +111,8 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
         contentView.addSubview(nameOfHabitTextField)
         contentView.addSubview(colorLabelName)
         contentView.addSubview(imageColor)
+        imageColor.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.addTarget(self, action: #selector(colorTapGesture))
 
 
     }
@@ -145,4 +157,15 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
 
         ])
     }
+
+    @objc func colorTapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
+        delegate?.colorImageWasTapped()
+    }
+
+//    @objc private func colorPressed() {
+//        let picker = UIColorPickerViewController()
+//        picker.selectedColor = self.view.backgroundColor!
+//        picker.delegate = self
+//        self.present(picker, animated: true, completion: nil)
+//    }
 }
