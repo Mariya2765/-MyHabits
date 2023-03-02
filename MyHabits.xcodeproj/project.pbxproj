@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C99F2A829B092500089B68D /* SaveHabitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99F2A729B092500089B68D /* SaveHabitCollectionViewCell.swift */; };
 		4CA6E0922994CCB600911AEE /* HabitsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA6E0912994CCB600911AEE /* HabitsStore.swift */; };
 		4CA6E0942996167900911AEE /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA6E0932996167900911AEE /* InfoTableViewCell.swift */; };
 		4CA6E096299A248700911AEE /* HabitViewCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA6E095299A248700911AEE /* HabitViewCreate.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C99F2A729B092500089B68D /* SaveHabitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveHabitCollectionViewCell.swift; sourceTree = "<group>"; };
 		4CA6E0912994CCB600911AEE /* HabitsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitsStore.swift; sourceTree = "<group>"; };
 		4CA6E0932996167900911AEE /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
 		4CA6E095299A248700911AEE /* HabitViewCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewCreate.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 		4CBC6EB929927AB600DB641C = {
 			isa = PBXGroup;
 			children = (
+				4C99F2A729B092500089B68D /* SaveHabitCollectionViewCell.swift */,
 				4CE154DF299E154F0087978F /* HabitViewController.swift */,
 				4CA6E099299B659C00911AEE /* HabitCollectionViewCell.swift */,
 				4CA6E097299B658900911AEE /* ProgressCollectionViewCell.swift */,
@@ -168,6 +171,7 @@
 				4CE154E0299E154F0087978F /* HabitViewController.swift in Sources */,
 				4CBC6EC829927AB600DB641C /* SceneDelegate.swift in Sources */,
 				4CA6E096299A248700911AEE /* HabitViewCreate.swift in Sources */,
+				4C99F2A829B092500089B68D /* SaveHabitCollectionViewCell.swift in Sources */,
 				4CA6E09A299B659C00911AEE /* HabitCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

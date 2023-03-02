@@ -18,6 +18,10 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
 
     weak var delegate: ColorPickerViewDelegate?
 
+    func getHabbitTitle() -> String {
+        return nameOfHabitTextField.text ?? ""
+    }
+
     private let titleLabelName: UILabel = {
         let title = UILabel()
         title.font = .systemFont(ofSize: 13, weight: .semibold)
@@ -57,8 +61,8 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
         return label
     }()
 
-    private let imageColor: UIView = {
-        let image = UIView(frame: CGRect(x: 10, y: 15, width: 30, height: 30))
+     lazy var imageColor: UIView = {
+        var image = UIView(frame: CGRect(x: 10, y: 15, width: 30, height: 30))
         image.layer.cornerRadius = image.frame.height/2
         image.layer.borderWidth = 15
         image.backgroundColor = .systemOrange
@@ -111,8 +115,9 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
     private let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.frame = CGRect(x: 10, y: 50, width: 100, height: 200)
-        datePicker.timeZone = NSTimeZone.local
-                datePicker.backgroundColor = UIColor.white
+        datePicker.datePickerMode = .time
+        datePicker.backgroundColor = UIColor.white
+        datePicker.preferredDatePickerStyle = .wheels
 
         return datePicker
     }()
@@ -162,9 +167,11 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
         contentView.addSubview(dateTextField)
         imageColor.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer.addTarget(self, action: #selector(colorTapGesture))
+        datePicker.addTarget(self, action: #selector(handleDateChanged(picker:)), for: .valueChanged)
 
 
     }
+
 
     func addConstraints() {
         NSLayoutConstraint.activate([
@@ -198,7 +205,7 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
 //            imageColor.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
             imageColor.heightAnchor.constraint(equalToConstant: 30),
             imageColor.widthAnchor.constraint(equalToConstant: 30),
-            imageColor.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+
 
             timeTitle.topAnchor.constraint(equalTo: imageColor.bottomAnchor, constant: 20),
             timeTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
@@ -210,6 +217,7 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
             everyDayLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
             everyDayLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
             everyDayLabel.heightAnchor.constraint(equalToConstant: 20),
+            everyDayLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
             dateTextField.topAnchor.constraint(equalTo: timeTitle.bottomAnchor, constant: 20),
             dateTextField.leadingAnchor.constraint(equalTo: everyDayLabel.leadingAnchor, constant: 130),
@@ -227,6 +235,18 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
     @objc func colorTapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
         delegate?.colorImageWasTapped()
     }
+
+    @objc
+    private func handleDateChanged(picker: UIDatePicker) {
+        let formatter = DateFormatter ()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        let timeString = formatter.string(from: picker.date)
+        dateTextField.text = timeString
+
+
+    }
+
 
 //    @objc private func colorPressed() {
 //        let picker = UIColorPickerViewController()

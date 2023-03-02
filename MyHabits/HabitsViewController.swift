@@ -11,6 +11,7 @@ class HabitsViewController: UIViewController {
 
     private enum Constants {
         static let reuseIdentifier = "collection_cell"
+        static let collectionID = "collectID"
     }
 
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -26,6 +27,7 @@ class HabitsViewController: UIViewController {
         collectionView.backgroundColor = UIColor(red: 242/255.0, green: 242/255.0, blue: 247/255.0, alpha: 1.0)
         collectionView.showsVerticalScrollIndicator = true
         collectionView.register(HabitCollectionViewCell.self, forCellWithReuseIdentifier: Constants.reuseIdentifier)
+        collectionView.register(SaveHabitCollectionViewCell.self, forCellWithReuseIdentifier: Constants.collectionID)
 
         navigationItem.title = "Сегодня"
 
@@ -58,23 +60,13 @@ class HabitsViewController: UIViewController {
         // цвет для навиг бара
         // во вью дидлоад навиг айтем
         
-        let buttonSave = UIBarButtonItem(title: "Сохранить", style: .done, target: self, action: #selector(saveHabit))
-        buttonSave.tintColor = UIColor(red: 161/255.0, green: 22/255.0, blue: 204/255.0, alpha: 1.0)
-        habitVc.navigationItem.rightBarButtonItem = buttonSave
-
-        let buttonCancel = UIBarButtonItem(title: "Отмена", style: .done, target: self, action: #selector(cancelHabit))
-        buttonCancel.tintColor = UIColor(red: 161/255.0, green: 22/255.0, blue: 204/255.0, alpha: 1.0)
-        habitVc.navigationItem.leftBarButtonItem = buttonCancel
+       
 
         navigationController?.present(habitNavContr, animated: true)
 
     }
 
-    @objc private func saveHabit() {
-    }
-
-    @objc private func cancelHabit() {
-    }
+   
 }
 
     // UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
@@ -85,16 +77,25 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
         if section == 0 {
         return 1
         } else {
-       return 5
+            return HabitsStore.shared.habits.count
     }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.section == 0 {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.reuseIdentifier, for: indexPath) as! HabitCollectionViewCell
         cell.configure(progress: HabitsStore.shared.todayProgress, title: "\(Int(HabitsStore.shared.todayProgress))%")
         cell.backgroundColor = .white
 
         return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.collectionID, for: indexPath) as! SaveHabitCollectionViewCell
+            cell.configure(title: HabitsStore.shared.todayProgress, time: HabitsStore.shared.dates, image: <#T##UIImage#>)
+//            cell.configure(progress: HabitsStore.shared.todayProgress, title: "\(Int(HabitsStore.shared.todayProgress))%")
+            cell.backgroundColor = .white
+
+            return cell
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
