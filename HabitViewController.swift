@@ -53,14 +53,20 @@ class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate
     }
 
     @objc private func saveHabit() {
-        let title = habitView.getHabbitTitle()
-        let color: UIColor = .systemGreen
-        let date = Date(habitView.dateTextField)
+
+        let newHabit = Habit(name: "Выпить стакан воды перед завтраком",
+                             date: Date(),
+                             color: .systemRed)
+        let store = HabitsStore.shared
+        store.habits.append(newHabit)
+//        let title = habitView.getHabbitTitle()
+//        let color: UIColor = .systemGreen
+//        let date = Date(habitView.datePicker.date)
         // непонятно как текстфилд перевести в дату - почитать, посмотреть
 
 
 //        HabitsStore.shared.habits.append(.init(name: title, date: Date(), color: color))
-        HabitsStore.save(Habit.init(name: title, date: date, color: color))
+//        HabitsStore.save(Habit.init(name: title, date: date, color: color))
         
     }
 
@@ -89,20 +95,21 @@ extension HabitViewController: ColorPickerViewDelegate {
         picker.delegate = self
         self.present(picker, animated: true, completion: nil)
     }
+
+
+    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
+        let color = viewController.selectedColor
+        habitView.imageColor.backgroundColor = color
+    }
+    
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         let color = viewController.selectedColor
         habitView.imageColor.backgroundColor = color
         dismiss(animated: true, completion: nil)
     }
 
-    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-        let color = viewController.selectedColor
-        habitView.imageColor.backgroundColor = color
-    }
 
-//    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-//        let color = viewController.selectedColor
-//    }
+
 
 
 }

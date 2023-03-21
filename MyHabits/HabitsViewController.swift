@@ -90,7 +90,8 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
         return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.collectionID, for: indexPath) as! SaveHabitCollectionViewCell
-            cell.configure(title: HabitsStore.shared.todayProgress, time: HabitsStore.shared.dates, image: <#T##UIImage#>)
+//            cell.configure(title: HabitsStore.shared.habits, time: HabitsStore.shared.dates, color: Habit)
+
 //            cell.configure(progress: HabitsStore.shared.todayProgress, title: "\(Int(HabitsStore.shared.todayProgress))%")
             cell.backgroundColor = .white
 
