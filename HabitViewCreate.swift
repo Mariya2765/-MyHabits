@@ -10,6 +10,7 @@ import UIKit
 
 protocol ColorPickerViewDelegate: AnyObject {
     func colorImageWasTapped()
+    func dateWasChanged(_ date: Date)
 }
 
 class HabitViewCreate: UIView, UITextFieldDelegate {
@@ -64,9 +65,9 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
      lazy var imageColor: UIView = {
         var image = UIView(frame: CGRect(x: 10, y: 15, width: 30, height: 30))
         image.layer.cornerRadius = image.frame.height/2
-        image.layer.borderWidth = 15
+//        image.layer.borderWidth = 15
         image.backgroundColor = .systemOrange
-        image.layer.borderColor = UIColor.orange.cgColor
+//        image.layer.borderColor = UIColor.orange.cgColor
         image.clipsToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false
 
@@ -103,7 +104,7 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
         dateTF.textColor = UIColor(red: 161/255.0, green: 22/255.0, blue: 204/255.0, alpha: 1.0)
         dateTF.textAlignment = .left
         dateTF.autocapitalizationType = .none
-        dateTF.text = "00"
+//        dateTF.text = "00"
         dateTF.translatesAutoresizingMaskIntoConstraints = false
 
 //        tfHabit.tintColor = .systemBlue
@@ -238,11 +239,8 @@ class HabitViewCreate: UIView, UITextFieldDelegate {
 
     @objc
     private func handleDateChanged(picker: UIDatePicker) {
-        let formatter = DateFormatter ()
-        formatter.dateStyle = .none
-        formatter.timeStyle = .short
-        let timeString = formatter.string(from: picker.date)
-        dateTextField.text = timeString
+       
+        delegate?.dateWasChanged(picker.date)
 
 
     }

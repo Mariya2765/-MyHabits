@@ -8,9 +8,10 @@
 import Foundation
 import UIKit
 
-class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate {
+class HabitViewController: UIViewController {
 
     private let habitView = HabitViewCreate()
+    private var currentDate = Date()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate
         navigationItem.leftBarButtonItem = buttonCancel
 
         habitView.delegate = self
+        dateWasChanged(currentDate)
     }
 
     func addConstraints() {
@@ -54,11 +56,13 @@ class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate
 
     @objc private func saveHabit() {
 
-        let newHabit = Habit(name: "Выпить стакан воды перед завтраком",
-                             date: Date(),
-                             color: .systemRed)
+        let newHabit = Habit(name: habitView.nameOfHabitTextField.text ?? "",
+                             date: currentDate,
+                             color: habitView.imageColor.backgroundColor ?? .blue)
         let store = HabitsStore.shared
         store.habits.append(newHabit)
+        dismiss(animated: true)
+        HabitStoreObserver.shared.reload()
 //        let title = habitView.getHabbitTitle()
 //        let color: UIColor = .systemGreen
 //        let date = Date(habitView.datePicker.date)
@@ -89,6 +93,7 @@ class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate
 }
 
 extension HabitViewController: ColorPickerViewDelegate {
+
     func colorImageWasTapped() {
         let picker = UIColorPickerViewController()
         picker.selectedColor = habitView.backgroundColor ?? UIColor.black
@@ -96,20 +101,32 @@ extension HabitViewController: ColorPickerViewDelegate {
         self.present(picker, animated: true, completion: nil)
     }
 
+    func dateWasChanged(_ date: Date) {
+        currentDate = date
 
-    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-        let color = viewController.selectedColor
-        habitView.imageColor.backgroundColor = color
+        let formatter = DateFormatter ()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        let timeString = formatter.string(from: date)
+        habitView.dateTextField.text = timeString
+
+
     }
-    
-    func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
-        let color = viewController.selectedColor
+
+
+}
+
+extension HabitViewController: UIColorPickerViewControllerDelegate {
+
+
+    func colorPickerViewController(
+        _ viewController: UIColorPickerViewController,
+        didSelect color: UIColor,
+        continuously: Bool
+    ) {
+        // 1. поменять цвет
         habitView.imageColor.backgroundColor = color
-        dismiss(animated: true, completion: nil)
+        // 2. закрыть
+            viewController.dismiss(animated: true)
     }
-
-
-
-
-
 }

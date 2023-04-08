@@ -33,6 +33,9 @@ class HabitsViewController: UIViewController {
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addHabit))
         navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 161/255.0, green: 22/255.0, blue: 204/255.0, alpha: 1.0)
+
+        HabitStoreObserver.shared.addObserver(self)
+        collectionView.reloadData()
     }
 
     private  func addConstraintsOfCollectionView() {
@@ -40,7 +43,7 @@ class HabitsViewController: UIViewController {
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 50)
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 
@@ -73,6 +76,10 @@ class HabitsViewController: UIViewController {
 
 extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
         return 1
@@ -83,13 +90,15 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.reuseIdentifier, for: indexPath) as! HabitCollectionViewCell
-        cell.configure(progress: HabitsStore.shared.todayProgress, title: "\(Int(HabitsStore.shared.todayProgress))%")
-        cell.backgroundColor = .white
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.reuseIdentifier, for: indexPath) as! HabitCollectionViewCell
+            cell.configure(progress: HabitsStore.shared.todayProgress, title: "\(Int(HabitsStore.shared.todayProgress))%")
+            cell.backgroundColor = .white
 
-        return cell
+            return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.collectionID, for: indexPath) as! SaveHabitCollectionViewCell
+            let habit = HabitsStore.shared.habits[indexPath.row]
+            cell.configure(title: habit.name, time: "time", color: habit.color)
 //            cell.configure(title: HabitsStore.shared.habits, time: HabitsStore.shared.dates, color: Habit)
 
 //            cell.configure(progress: HabitsStore.shared.todayProgress, title: "\(Int(HabitsStore.shared.todayProgress))%")
@@ -134,5 +143,11 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
     }
 }
 
+extension HabitsViewController: HabitStoreObservable {
 
+    func needReloadData() {
+        collectionView.reloadData()
+    }
+
+}
 

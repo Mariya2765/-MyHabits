@@ -192,6 +192,30 @@ public final class HabitsStore {
     }
 }
 
+protocol HabitStoreObservable {
+    func needReloadData()
+}
+
+public class HabitStoreObserver {
+    static let shared = HabitStoreObserver()
+
+    private var observables: [HabitStoreObservable] = []
+
+    func reload() {
+        observables.forEach {
+            $0.needReloadData()
+        }
+    }
+
+    func addObserver(_ observable: HabitStoreObservable) {
+        observables.append(observable)
+    }
+}
+
+
+
+
+
 private extension Date {
     
     static func dates(from fromDate: Date, to toDate: Date) -> [Date] {
